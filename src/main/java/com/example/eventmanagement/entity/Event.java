@@ -1,8 +1,11 @@
 package com.example.eventmanagement.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.*;
 @Entity
+@Data
 public class Event {
 
     @Id
@@ -22,6 +25,7 @@ public class Event {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Material> materials = new ArrayList<>();
+
 
     @ManyToMany
     @JoinTable(

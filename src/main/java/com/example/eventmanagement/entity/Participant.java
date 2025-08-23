@@ -2,9 +2,12 @@ package com.example.eventmanagement.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.*;
 
 @Entity
+@Data
 public class Participant {
 
     @Id
@@ -16,5 +19,5 @@ public class Participant {
 
     @ManyToMany(mappedBy = "participants")
     private Set<Event> events = new HashSet<>();
-    // Getters & Setters
+
 }
