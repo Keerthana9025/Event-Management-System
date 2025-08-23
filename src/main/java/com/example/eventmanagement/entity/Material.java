@@ -1,8 +1,10 @@
 package com.example.eventmanagement.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class Material {
 
     @Id
@@ -17,5 +19,5 @@ public class Material {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    // Getters & Setters
+
 }
