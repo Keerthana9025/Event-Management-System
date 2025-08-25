@@ -1,37 +1,43 @@
 package com.example.eventmanagement.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.*;
+import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Data
+@Table(name = "events")
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @NotBlank(message = "Title must not be empty")
+    private String title;
+
+    @NotBlank(message = "Description must not be empty")
+    private String description;
+
+    @NotBlank(message = "Category must not be empty")
+    private String category;
+
+    @NotNull(message = "Date must not be null")
+    private LocalDate date;
+
     private String location;
-    private Date date;
-
-    @OneToMany(mappedBy = "event",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Session> sessions = new ArrayList<>();
-
-    @OneToMany(mappedBy = "event",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Material> materials = new ArrayList<>();
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "event_participant",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "participant_id")
-    )
-    private Set<Participant> participants = new HashSet<>();
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("event")  // prevent recursion
+    private List<Session> sessions;
+
+
 }
