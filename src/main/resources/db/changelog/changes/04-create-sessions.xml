@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <changeSet id="4" author="venka">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="sessions"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="sessions">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="topic" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="speaker" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_id" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="sessions"
+                                 baseColumnNames="event_id"
+                                 constraintName="fk_session_event"
+                                 referencedTableName="events"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
