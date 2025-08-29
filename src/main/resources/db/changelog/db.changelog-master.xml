@@ -20,6 +20,8 @@
 
     <!-- Create Session Materials (depends on Sessions) -->
     <include file="db/changelog/changes/05-create-session-materials.xml"/>
+    <include file="db/changelog/changes/06-create-data-audit-log.xml"/>
+
 
 </databaseChangeLog>
 
