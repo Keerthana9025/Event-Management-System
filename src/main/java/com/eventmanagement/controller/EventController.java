@@ -24,14 +24,12 @@ EventController {
     }
 
 
-
-
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable Long id) {
         return ResponseEntity.ok(eventService.getEventById(id));
     }
 
-    // GET /api/events?category=Tech OR /api/events?date=2025-08-21 OR /api/events?start=2025-08-01&end=2025-08-31
+
     @GetMapping
     public ResponseEntity<List<Event>> getAllEvents(
             @RequestParam(required = false) String category,
@@ -50,9 +48,4 @@ EventController {
         return ResponseEntity.ok(eventService.updateEvent(id, event));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
-        eventService.deleteEvent(id);
-        return ResponseEntity.noContent().build();
-    }
 }
