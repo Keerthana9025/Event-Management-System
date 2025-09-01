@@ -21,8 +21,6 @@ public class ParticipantController {
         this.participantService = participantService;
         this.registrationService = registrationService;
     }
-
-    // CRUD participants
     @PostMapping
     public ResponseEntity<Participant> create(@Valid @RequestBody Participant p) {
         return ResponseEntity.ok(participantService.create(p));
@@ -55,10 +53,6 @@ public class ParticipantController {
         return ResponseEntity.ok(registrationService.register(participantId, eventId));
     }
 
-    @GetMapping("/{participantId}/events")
-    public ResponseEntity<List<Registration>> registeredEvents(@PathVariable Long participantId) {
-        return ResponseEntity.ok(registrationService.registrationsByParticipant(participantId));
-    }
 
     @DeleteMapping("/registrations/{registrationId}")
     public ResponseEntity<Void> unregister(@PathVariable Long registrationId) {
