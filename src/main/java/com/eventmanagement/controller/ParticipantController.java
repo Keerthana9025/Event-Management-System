@@ -41,11 +41,6 @@ public class ParticipantController {
         return ResponseEntity.ok(participantService.update(id, p));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        participantService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
 
     // Registrations
     @PostMapping("/{participantId}/registrations/{eventId}")
@@ -54,9 +49,5 @@ public class ParticipantController {
     }
 
 
-    @DeleteMapping("/registrations/{registrationId}")
-    public ResponseEntity<Void> unregister(@PathVariable Long registrationId) {
-        registrationService.unregister(registrationId);
-        return ResponseEntity.noContent().build();
-    }
+
 }
